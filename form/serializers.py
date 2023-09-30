@@ -5,4 +5,4 @@ from rest_framework.validators import UniqueValidator
 class Formserializer(serializers.ModelSerializer):
     class Meta:
         model = Form
-        fields = ["name", "identification_number", "email", "date_of_birth"]
+        fields = ["id", "name", "identification_number", "email", "date_of_birth"]

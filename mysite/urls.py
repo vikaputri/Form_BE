@@ -20,6 +20,7 @@ from form import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('data/', views.data_list),
-    path('data/<int:pk>/', views.data_detail),
+    path('data', views.data_list),
+    path('data/<int:pk>', views.data_detail),
 ]
+
