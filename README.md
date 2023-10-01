@@ -1,5 +1,5 @@
 # Backend
-How To Install in Local
+## How To Install in Local
 1. Clone Project :
 ```
 git clone https://github.com/vikaputri/Form_BE.git
@@ -20,16 +20,18 @@ env/Scripts/activate
 ```
 pip install -r requirements.txt
 ```
-7. Migrate Database
+
+## How to Migrate Database
 ```
 python manage.py makemigrations
 python manage.py migrate
 ```
-9. Createsuperuser:
+
+## How to Createsuperuser:
 ```
 python manage.py createsuperuser
 ```
-8. Run
+## How to Run
 ```
 python manage.py runserver
 ```
