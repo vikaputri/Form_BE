@@ -35,3 +35,8 @@ python manage.py createsuperuser
 ```
 python manage.py runserver
 ```
+
+## How to Testing
+```
+python manage.py test
+```
