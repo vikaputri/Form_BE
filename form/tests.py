@@ -101,6 +101,58 @@ class CreateFormTest(TestCase):
         )
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
+class UpdateSinglePuppyTest(TestCase):
+    """ Test module for updating an existing puppy record """
+
+    def setUp(self):
+        self.Vika = Form.objects.create(
+            name='Vika',
+            identification_number='123456789012',
+            email='vika@gmail.com',
+            date_of_birth='2020-01-01'
+        )
+        self.Putri = Form.objects.create(
+            name='Putri',
+            identification_number='098765432123',
+            email='putri@gmail.com',
+            date_of_birth='2020-01-01'
+        )
+        self.Ariyanti = Form.objects.create(
+            name='Ariyanti',
+            identification_number='675849302182',
+            email='ariyanti@gmail.com',
+            date_of_birth='2020-01-01'
+        )
+        self.valid_payload = {
+            'name' : 'Vika Putri',
+            'identification_number' : '123456789012',
+            'email' : 'vika@gmail.com',
+            'date_of_birth' : '2020-01-01'
+        }
+
+        self.invalid_payload = {
+            'name' : '',
+            'identification_number' : '123456789012',
+            'email' : 'vikaputri@gmail.com',
+            'date_of_birth' : '2020-01-01'
+        }
+
+    def test_valid_update(self):
+        response = client.put(
+            reverse('data_detail', kwargs={'pk': self.Vika.pk}),
+            data=json.dumps(self.valid_payload),
+            content_type='application/json'
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_invalid_update_puppy(self):
+        response = client.put(
+            reverse('data_detail', kwargs={'pk': self.Vika.pk}),
+            data=json.dumps(self.invalid_payload),
+            content_type='application/json'
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
 class DeleteFormTest(TestCase):
     def setUp(self):
         self.Vika = Form.objects.create(
@@ -122,10 +174,10 @@ class DeleteFormTest(TestCase):
             date_of_birth='2020-01-01'
         )
 
-    def test_valid_delete_puppy(self):
+    def test_valid_delete(self):
         response = client.delete(reverse('data_detail', kwargs={'pk': self.Vika.pk}))
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
-    def test_invalid_delete_puppy(self):
+    def test_invalid_delete(self):
         response = client.delete(reverse('data_detail', kwargs={'pk': 30}))
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
